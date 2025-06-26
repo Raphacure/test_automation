@@ -51,23 +51,27 @@ describe('To category are Redirect or not',()=>{
         // cy.get('.our-services-all [index="0"]').eq(1).click();
         cy.get('.home-page-card').filter(':visible').eq(0).scrollIntoView().click();
         cy.url().should('include','https://raphacure.com/doctor')
+        cy.wait(3000);
     })
      it('Pharmacy Redirection',()=>{
         cy.visit('https://raphacure.com/')
         // cy.get('.our-services-all [index="0"]').eq(1).click();
         cy.get('.home-page-card').filter(':visible').eq(1).scrollIntoView().click();
         cy.url().should('include','https://raphacure.com/pharmacy')
+           cy.wait(3000);
     })
      it('Labtest Redirection',()=>{
         cy.visit('https://raphacure.com/')
         // cy.get('.our-services-all [index="0"]').eq(1).click();
         cy.get('.home-page-card').filter(':visible').eq(2).scrollIntoView().click();
         cy.url().should('include','https://raphacure.com/labtest')
+        cy.wait(3000);
     })
      it('Radiology  Redirection',()=>{
         cy.visit('https://raphacure.com/')
        cy.contains('.home-page-card', 'Radiology').scrollIntoView().click();
 
-        cy.url().should('include', 'https://raphacure.com/radiology'); 
+        cy.url().should('include', 'https://raphacure.com/radiology');
+        cy.wait(3000); 
       })
 })
