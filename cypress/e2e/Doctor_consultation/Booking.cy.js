@@ -141,20 +141,12 @@ describe('Virtual Booking', () => {
 
         // cy.get('button[data-testid="checkout-close"]').should('be.visible').click();
        cy.get('iframe')
-        .its('0.contentDocument.body')
-        .should('not.be.empty')
-        .then(cy.wrap)
-        .find('button[data-testid="checkout-close"]')
-        .should('be.visible')
-        .click();
+        .its('0.contentDocument.body').should('not.be.empty')
+         .then(cy.wrap).find('button[data-testid="checkout-close"]').should('be.visible').click();
 
        cy.get('iframe')
-        .its('0.contentDocument.body')
-        .should('not.be.empty')
-        .then(cy.wrap)
-        .find('button[data-testid="confirm-negative"]')
-        .should('be.visible')
-        .click()
+        .its('0.contentDocument.body').should('not.be.empty').then(cy.wrap)
+        .find('button[data-testid="confirm-negative"]').should('be.visible').click()
         .then(() => cy.log('Iframe close clicked'));
         cy.wait(2000);
       //

@@ -2,7 +2,12 @@
 
 describe.only('Pharmacy - Add to Cart', () => {
   const phoneNumber = '9505698990';
-  const otp = ['5', '0', '6', '1', '6', '3'];
+  function generateOTP() {
+        const now = new Date();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // e.g., '06'
+        const day = String(now.getDate()).padStart(2, '0');        // e.g., '25'
+        return `5${month}${day}3`; // e.g., '506253'
+        }
   
 
   beforeEach(() => {
@@ -10,6 +15,7 @@ describe.only('Pharmacy - Add to Cart', () => {
   });
 
   it('should add a random product to the cart', () => {
+   const otp = generateOTP().split('');
     // Login Flow
     cy.contains('Login').click();
     cy.get('.input-phone-box').type(phoneNumber);
@@ -44,6 +50,6 @@ describe.only('Pharmacy - Add to Cart', () => {
     cy.get('.cart-icon-div > img').click();
     cy.url().should('include', 'https://raphacure.com/cart');
     cy.get('.cart-icon-div').should('have.length.greaterThan', 0);
-  
+    cy.get('.save-btn').click();
   });
 });
