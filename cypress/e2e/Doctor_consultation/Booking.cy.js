@@ -4,74 +4,6 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   }
 });
 
-
-// describe('Virtual Booking',()=>{
-//      before(() => {
-//     cy.visit('https://raphacure.com');
-//      });
-//     it('chat booking',()=>{
-//             cy.contains('Login').click();
-
-//          const phoneNumber = '9505698990';
-//             const otp = ['5', '0', '6', '1', '3', '3'];
-
-//             // Enter phone number and agree to terms
-//             cy.get('.input-phone-box').type(phoneNumber);
-//             cy.get('#checkboxaggrews').check();
-
-//             // Verify button is enabled and click it
-//             cy.get('.proceed-btn button').should('not.be.disabled').click();
-            
-//             // Verify OTP modal appears
-//             cy.get('.modalBodyDefault').should('be.visible');
-
-//             // Enter OTP
-//             otp.forEach((digit, index) => {
-//             cy.get(`[aria-label="Please enter OTP character ${index + 1}"]`).type(digit);
-//             });
-
-            
-
-//         cy.visit('https://raphacure.com/doctor');
-//          cy.contains('button', 'Schedule Consult')
-//             .should('be.visible')
-//             .click();
-//         cy.url().should('include','https://raphacure.com/doctor/doctorlist')
-
-//         cy.get('.contect-book-btn').should('be.visible').first().click()
-//         cy.url().should('include','https://raphacure.com/doctor/doctordetails/1');
-//         cy.get('#virtual-types-list1').check().should('be.checked')
-//         cy.get('.day-button').eq(1).click();
-       
-    
-//         cy.get('.time-slots-div .slot-button')
-//             .then($buttons => {
-//                 const count = $buttons.length;
-//                 const randomIndex = Math.floor(Math.random() * count);
-//                 cy.wrap($buttons[randomIndex]).click();
-//             });
-//         cy. wait(1000)
-
-//         cy.get('.pay-proceed').click()
-//         cy.wait(1000)
-        
-        
-//              cy.visit('https://raphacure.com/checkout');
-
-
-//         // cy.url({ timeout: 10000 }).should('include', '/checkout');
-//         // cy.get('.checkout-pay-buttom.phonePe button').click();
-//         // cy.get('.b2bContainer').should('be.visible')
-//         // cy.get('#headerCloseIcon').click();
-//         // cy.get('.aoxbYbm95giIvvneUhoAZQ==').should('be.visible')
-//         // cy.get('.JyDxltg+9iYA-Iqvc7sq5g== :last-child').click()
-//         // cy.get('.modal-content').should('be.visible');
-//         // cy.get('.modalDeleteBtn').click()
-//         // cy.url().should('include','https://raphacure.com/dashboard/bookings') 
-
-//     })
-// })
-
 describe('Virtual Booking', () => {
   const phoneNumber = '9505698990';
   function generateOTP() {
@@ -122,19 +54,19 @@ describe('Virtual Booking', () => {
       });
 
     // Step 6: Proceed to Checkout
-    cy.get('.pay-proceed').should('be.visible').click();
+      cy.get('.pay-proceed').should('be.visible').click();
     
-    cy.url().should('include', '/checkout');
+      cy.url().should('include', '/checkout');
     // Optional: PhonePe payment test (mock or conditionally check)
       
 
       //  cy.get('.checkout-pay-buttom.phonePe button').click();
-      cy.get('.checkout-pay-buttom.checkout-btn-blue button').first().click();
+        cy.get('.checkout-pay-buttom.checkout-btn-blue button').first().click();
 
-      cy.get('iframe[class*="razorpay-checkout-frame"]', { timeout: 10000 })
-        .should('be.visible')
-        .then($iframe => {
-         const body = $iframe[0].contentDocument.body;
+        cy.get('iframe[class*="razorpay-checkout-frame"]', { timeout: 10000 })
+          .should('be.visible')
+          .then($iframe => {
+          const body = $iframe[0].contentDocument.body;
 
         });
      
@@ -146,19 +78,25 @@ describe('Virtual Booking', () => {
 
        cy.get('iframe')
         .its('0.contentDocument.body').should('not.be.empty').then(cy.wrap)
-        .find('button[data-testid="confirm-negative"]').should('be.visible').click()
+        .find('button[data-testid="confirm-positive"]').should('be.visible').click()
         .then(() => cy.log('Iframe close clicked'));
-        cy.wait(2000);
-      //
+        cy.wait(2000); 
+      
+        cy.contains('Payment failed. Please retry from patient dashboard', { timeout: 3000 })
+          .should('be.visible')
+          .then(() => {
+        cy.log('Modal is visible');
+          
+          cy.get('.modal-content').should('be.visible').within(() => {
+              cy.contains('button', 'Ok')
+                .should('be.visible')
+                .click();
+          });
+        });
+
+       cy.url().should('include', 'https://raphacure.com/dashboard/bookings');
+
      
-        // cy.contains('Payment failed. Please retry from patient dashboard', { timeout: 10000 })
-        // .should('be.visible')
-        // .then(() => cy.log('Modal is visible'));
-        // cy.contains('button', 'Ok').click();
-        // cy.get('.modal').should('be.visible').then(() => {
-        //   cy.log('Modal is visible');
-        //   cy.contains('button', 'Ok').click();
-        // });
 
   });
   

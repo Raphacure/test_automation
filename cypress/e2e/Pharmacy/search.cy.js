@@ -7,6 +7,7 @@ describe('Pharmacy Search', () => {
     cy.get('.search-popup',{timeout:12000}).should('contain', 'Dolo 650 Tablet');
 
   });
+  
 
 });
 
