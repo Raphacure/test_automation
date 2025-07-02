@@ -7,6 +7,8 @@
     "cypress-xpath": "^2.0.1"
   },
   "scripts": {
-    "start": "npx cypress open"
+    "start": "npx cypress run",
+     "test-doctor-consultation": "npx cypress run --spec \"cypress/e2e/Doctor_consultation/DoctorConsultationSearch.cy.js\"",
+    "test-pharmacy-cart": "npx cypress run --spec \"cypress/e2e/Pharmacy/AddToCart.cy.js\"" 
   }
 }
