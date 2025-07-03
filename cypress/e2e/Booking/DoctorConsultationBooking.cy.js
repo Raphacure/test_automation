@@ -1,5 +1,3 @@
-
-
 Cypress.on('uncaught:exception', (err, runnable) => {
   if (err.message.includes("tokenUrl")) {
     return false; // prevents Cypress from failing the test
@@ -74,7 +72,7 @@ describe('Doctor Consultation Search and Booking', () => {
 
           //  cy.get('.checkout-pay-buttom.phonePe button').click();
             cy.get('.checkout-pay-buttom.checkout-btn-blue button').first().click();
-
+            cy.wait(2000); // Wait for the payment options to load
             cy.get('iframe[class*="razorpay-checkout-frame"]', { timeout: 10000 })
               .should('be.visible')
               .then($iframe => {
@@ -148,7 +146,7 @@ describe('Doctor Consultation Search and Booking', () => {
 //       cy.get(`[aria-label="Please enter OTP character ${index + 1}"]`, { timeout: 10000 }).type(digit);
 //     });
 
-//     cy.url({ timeout: 20000 }).should('include', '/doctor');
+//     cy.url({ timeout: 2000 }).should('include', '/doctor');
     
 //     // Wait for search input to load
 //     cy.get('.search-input', { timeout: 15000 }).should('be.visible').type('Naveen Gowda');
@@ -159,6 +157,7 @@ describe('Doctor Consultation Search and Booking', () => {
 //     cy.contains('.search-popup-name', 'Naveen Gowda', { timeout: 20000 }).click();
 
 //     cy.url({ timeout: 20000 }).should('include', '/doctor/doctordetails/');
+//     cy.wait(3000); // allow time for page to load
 
 //     // Choose Booking Options
 //     cy.get('#virtual-types-list1', { timeout: 10000 }).check().should('be.checked');
@@ -174,11 +173,11 @@ describe('Doctor Consultation Search and Booking', () => {
 //       });
 
 //     // IMPORTANT: Wait for pay-proceed to become visible
-//     cy.get('.pay-proceed', { timeout: 30000 })
+//     cy.get('.pay-proceed', { timeout: 20000 })
 //       .should('be.visible')
 //       .click();
 
-//     cy.url({ timeout: 30000 }).should('include', '/checkout');
+//     cy.url({ timeout: 3000 }).should('include', '/checkout');
 
 //     // Click payment button
 //     cy.get('.checkout-pay-buttom.checkout-btn-blue button', { timeout: 20000 }).first().click();

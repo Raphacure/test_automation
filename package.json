@@ -8,7 +8,9 @@
   },
   "scripts": {
     "start": "npx cypress run",
-     "test-doctor-consultation": "npx cypress run --spec \"cypress/e2e/Doctor_consultation/DoctorConsultationSearch.cy.js\"",
-    "test-pharmacy-cart": "npx cypress run --spec \"cypress/e2e/Pharmacy/AddToCart.cy.js\"" 
+    "test-doctor-consultation-Booking": "npx cypress run --browser chrome --spec \"cypress/e2e/Booking/DoctorConsultationBooking.cy.js\"",
+    "test-pharmacy-cart": "npx cypress run --browser chrome --spec \"cypress/e2e/Pharmacy/*.cy.js\"",
+    "home-page": "npx cypress run --browser chrome --spec \"cypress/e2e/Home/*.cy.js\"",
+    "test-doctor-consultation": "npx cypress run --browser chrome --spec \"cypress/e2e/Doctor_consultation/Specialization.cy.js\""
   }
 }
