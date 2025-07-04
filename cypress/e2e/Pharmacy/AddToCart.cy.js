@@ -12,6 +12,7 @@ describe.only('Pharmacy - Add to Cart', () => {
 
   beforeEach(() => {
     cy.visit('https://raphacure.com/pharmacy');
+    cy.viewport(1480, 900);
   });
 
   it('should add a random product to the cart', () => {

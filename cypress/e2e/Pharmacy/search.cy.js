@@ -1,4 +1,7 @@
 describe('Pharmacy Search', () => {
+  beforeEach(() => {
+    cy.viewport(1480, 900); // Set viewport to desktop size
+  });
   it('Searching for a medicine', () => {
     cy.visit('https://raphacure.com/pharmacy');
     cy.wait(2000); // Wait for the page to load

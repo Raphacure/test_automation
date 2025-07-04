@@ -1,6 +1,8 @@
 describe('searchbar testing',()=>{
 
-    
+     beforeEach(() => {
+      cy.viewport(1480, 900);
+    });
   it('Searching doctor name (desktop view)', () => {
       cy.visit('https://raphacure.com');
 

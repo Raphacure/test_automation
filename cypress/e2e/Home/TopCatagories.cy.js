@@ -2,7 +2,9 @@
 
 
 describe('Top Categorys visbility',()=>{
-
+    beforeEach(() => {
+        cy.viewport(1480, 900);
+      });
     it('Top Category Headding visible or not ',()=>{
         cy.visit('https://raphacure.com/');
         cy.get('#top-category-heading').should('be.visible').should('contain','Top Category')

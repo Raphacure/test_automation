@@ -1,6 +1,9 @@
 
 
 describe("Locaton", () => {
+   beforeEach(() => {
+    cy.viewport(1480, 900);
+  });
   it("location", () => {
     cy.visit("https://raphacure.com");
 

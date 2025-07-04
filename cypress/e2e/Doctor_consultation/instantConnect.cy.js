@@ -12,6 +12,9 @@ describe('Instant Connect', () => {
                     return `5${month}${day}3`; // e.g., '506253'
                     }
             const otp = generateOTP().split('');
+           beforeEach(() => {
+              cy.viewport(1480, 900);
+           });
   it('checking instant doctor section visibility', () => {
 
   

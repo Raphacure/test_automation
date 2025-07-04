@@ -7,9 +7,11 @@ describe('Login Modal Validation', () => {
         const day = String(now.getDate()).padStart(2, '0');        // e.g., '25'
         return `5${month}${day}3`; // e.g., '506253'
         }
+       
   beforeEach(() => {
     // Visit the page and trigger the login modal
     cy.visit('https://raphacure.com');
+    cy.viewport(1480, 900);
     cy.contains('Login').click();
   });
   it("Login form Heading",()=>{
