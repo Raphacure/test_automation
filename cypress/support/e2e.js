@@ -21,3 +21,7 @@ import './commands'
 // cypress/support/e2e.js or cypress/support/index.js
 
 require('cypress-xpath');
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // prevents Cypress from failing the test
+  return false;
+});

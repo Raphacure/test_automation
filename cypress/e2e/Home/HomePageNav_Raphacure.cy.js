@@ -17,10 +17,10 @@ describe("Locaton", () => {
       "38/3, HSR Layout, Bengaluru, India"  );
 
     // Optional: wait for auto-suggestions to load
-    cy.wait(3000); // you can improve this later
+    cy.wait(3000);
 
     // Press enter or click on the first suggestion
-    cy.get('.pac-item').first().click(); // if auto-suggest uses this class
+    cy.get('.pac-item').first().click(); 
        
     // Assert expected location shows in UI
     cy.get('.header-left-sec4').should('contain.text', 'Select Service Location: Bengaluru, 560102');
