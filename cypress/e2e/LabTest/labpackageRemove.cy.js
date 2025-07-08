@@ -29,16 +29,24 @@ describe('labpackageRemove', () => {
         timeout: 1000,
       }).type(digit);
     });
-
-    cy.get('.checkout-item-box')
-    .contains('p', 'Lab Test')
-    .parents('.checkout-item-box')
-    .within(() => {
-    // Now you're inside the specific box with Lab Test
-    // You can write further Cypress actions here
-   cy.get('#dropdown-basic').invoke('show').click();
+    cy.contains('div.checkout-item-box p', 'Lab Test')
+        .should('exist')
+        .closest('.checkout-item-box')
+        .within(() => {
+    // Example action inside that box
+    cy.get('#dropdown-basic').invoke('show').click();
    cy.get('.dropdown-menu').should('be.visible').click();
   });
+
+//     cy.get('.checkout-item-box')
+//     .contains('p', 'Lab Test')
+//     .parents('.checkout-item-box')
+//     .within(() => {
+//     // Now you're inside the specific box with Lab Test
+//     // You can write further Cypress actions here
+//    cy.get('#dropdown-basic').invoke('show').click();
+//    cy.get('.dropdown-menu').should('be.visible').click();
+//   });
   cy.get('.modal-content').should('be.visible').within(() => {
     cy.contains('button', 'Confirm')
       .should('be.visible')
