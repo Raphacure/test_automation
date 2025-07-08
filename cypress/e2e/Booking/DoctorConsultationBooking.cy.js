@@ -42,7 +42,7 @@ describe('Doctor Consultation Search and Booking', () => {
             // cy.get('.search-popup').should('be.visible');
 
             // Ensure the popup item with correct name appears
-            cy.get('.appointment-card').click();
+            cy.get('.appointment-card').first().click();
             
              cy.url().should('include', 'https://raphacure.com/doctor/doctordetails/22463');
 
