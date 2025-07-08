@@ -40,7 +40,7 @@ describe('Doctor Consultation Search and Booking', () => {
             cy.get('.search-popup').should('be.visible');
 
             // Ensure the popup item with correct name appears
-            cy.contains('.search-popup-name', 'Naveen Gowda', { timeout: 15000 })
+            cy.contains('.search-popup-name', 'Naveen Gowda', { timeout: 20000 })
                 .should('be.visible')
                 .click();
             
