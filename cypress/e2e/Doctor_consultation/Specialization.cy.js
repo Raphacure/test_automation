@@ -73,13 +73,13 @@ describe('Doctor Consultation Specialization', () => {
     });
     cy.wait(4000);
   })
-  it('checking general physician specialization redirection', () => {
+  it('checking Sexology specialization redirection', () => {
     cy.visit('https://raphacure.com/doctor');
     cy.wait(2000); // Wait for the page to load
-    cy.get('.react-multi-carousel-item.react-multi-carousel-item--active[data-index="2"]').invoke('css', 'border', '3px solid red').should('be.visible').click();
+    cy.get('.react-multi-carousel-item.react-multi-carousel-item--active[data-index="0"]').invoke('css', 'border', '3px solid red').should('be.visible').click();
     
     // Verify that the URL includes the expected path
-    cy.url().should('include','https://raphacure.com/doctor/doctorlist/89')
+    cy.url().should('include','https://raphacure.com/doctor/doctorlist/94')
     cy.get('.sideFilterModule').invoke('css', 'border', '3px solid red').should('be.visible');
     
     // Verify that the specialization checkbox is checked
@@ -110,6 +110,6 @@ describe('Doctor Consultation Specialization', () => {
     cy.get('.doctore-card-div > div').each(($el) => {
       cy.wrap($el).should('be.visible').invoke('css', 'border', '3px solid green');
     });
-  }
-  );
+  });
+  
 });

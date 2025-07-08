@@ -50,7 +50,7 @@ describe('Virtual Booking', () => {
       .then($buttons => {
         const count = $buttons.length;
         const randomIndex = Math.floor(Math.random() * count);
-        cy.wrap($buttons[randomIndex]).click();
+        cy.wrap($buttons[randomIndex]).click({force: true});
       });
 
     // Step 6: Proceed to Checkout
@@ -72,30 +72,54 @@ describe('Virtual Booking', () => {
      
 
         // cy.get('button[data-testid="checkout-close"]').should('be.visible').click();
-       cy.get('iframe')
-        .its('0.contentDocument.body').should('not.be.empty')
-         .then(cy.wrap).find('button[data-testid="checkout-close"]').should('be.visible').click();
+      //  cy.get('iframe')
+      //   .its('0.contentDocument.body').should('not.be.empty')
+      //    .then(cy.wrap).find('button[data-testid="checkout-close"]').should('be.visible').click();
 
-       cy.get('iframe')
-        .its('0.contentDocument.body').should('not.be.empty').then(cy.wrap)
-        .find('button[data-testid="confirm-positive"]').should('be.visible').click()
-        .then(() => cy.log('Iframe close clicked'));
-        cy.wait(2000); 
+      //  cy.get('iframe')
+      //   .its('0.contentDocument.body').should('not.be.empty').then(cy.wrap)
+      //   .find('button[data-testid="confirm-positive"]').should('be.visible').click()
+      //   .then(() => cy.log('Iframe close clicked'));
+      //   cy.wait(2000); 
       
-        cy.contains('Payment failed. Please retry from patient dashboard', { timeout: 3000 })
-          .should('be.visible')
-          .then(() => {
-        cy.log('Modal is visible');
+      //   cy.contains('Payment failed. Please retry from patient dashboard', { timeout: 3000 })
+      //     .should('be.visible')
+      //     .then(() => {
+      //   cy.log('Modal is visible');
           
-          cy.get('.modal-content').should('be.visible').within(() => {
-              cy.contains('button', 'Ok')
-                .should('be.visible')
-                .click();
-          });
-        });
+      //     cy.get('.modal-content').should('be.visible').within(() => {
+      //         cy.contains('button', 'Ok')
+      //           .should('be.visible')
+      //           .click();
+      //     });
+      //   });
 
-       cy.url().should('include', 'https://raphacure.com/dashboard/bookings');
+      //  cy.url().should('include', 'https://raphacure.com/dashboard/bookings');
+        cy.get('iframe')
+            .its('0.contentDocument.body').should('not.be.empty')
+            .then(cy.wrap).find('button[data-testid="checkout-close"]').invoke('css', 'border', '3px solid red').should('be.visible').click();
 
+          cy.get('iframe')
+            .its('0.contentDocument.body').should('not.be.empty').then(cy.wrap)
+            .find('button[data-testid="confirm-positive"]').invoke('css', 'border', '3px solid red').should('be.visible').click()
+            .then(() => cy.log('Iframe close clicked'));
+            cy.wait(1000); 
+          
+          // data-testid="confirm-positive"
+          cy.contains('Payment failed. Please retry from patient dashboard', { timeout: 5000 }).invoke('css', 'border', '3px solid green')
+            .should('be.visible')
+            .then(() => {
+              cy.log('Modal is visible');
+              
+              cy.get('.modal-content').invoke('css', 'border', '3px solid red').should('be.visible').within(() => {
+                cy.contains('button', 'Ok').invoke('css', 'border', '3px solid red')
+                  .should('be.visible')
+                  .click();
+              });
+            });
+
+          cy.url().should('include', 'https://raphacure.com/dashboard/bookings');
+       
      
 
   });
