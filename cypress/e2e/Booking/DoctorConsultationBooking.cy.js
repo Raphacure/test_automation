@@ -32,7 +32,8 @@ describe('Doctor Consultation Search and Booking', () => {
                 });
                 cy.url().should('include', 'https://raphacure.com/doctor');
               cy.wait(2000); // allow initial load
-
+              // cy.get('uploadBtnContainer button').should('be.visible').click();
+              // cy.url().should('include', 'https://raphacure.com/doctor/doctorlist');
             // Type doctor's name
             cy.get('.search-input').type('Naveen Gowda');
 
@@ -65,7 +66,7 @@ describe('Doctor Consultation Search and Booking', () => {
             // cy.get('.pay-proceed', { timeout: 10000 }).should('be.visible').click()
 
           // Step 6: Proceed to Checkout
-          cy.get('.pay-proceed').should('be.visible').click();
+          cy.get('.pay-proceed',{ timeout: 10000 }).should('be.visible').click();
           
           cy.url().should('include', '/checkout');
           // Optional: PhonePe payment test (mock or conditionally check)
