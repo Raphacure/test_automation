@@ -20,59 +20,60 @@ describe('Doctor Consultation Search and Booking', () => {
 
         it('Searching for a doctor', () => {
              cy.visit('https://raphacure.com/doctor');
-             cy.contains('Login').click();
-                cy.get('.input-phone-box').type(phoneNumber);
-                cy.get('#checkboxaggrews').check(); 
-                cy.get('.proceed-btn button').should('not.be.disabled').click();
+             cy.contains('Login').invoke('css', 'border', '3px solid red').click();
+                cy.get('.input-phone-box').invoke('css', 'border', '3px solid red').type(phoneNumber);
+                cy.get('#checkboxaggrews').invoke('css', 'border', '3px solid red').check(); 
+                cy.get('.proceed-btn button').invoke('css', 'border', '3px solid red').should('not.be.disabled').click();
 
-                cy.get('.modalBodyDefault').should('be.visible');
+                cy.get('.modalBodyDefault').invoke('css', 'border', '3px solid red').should('be.visible');
 
                 otp.forEach((digit, index) => {
-                cy.get(`[aria-label="Please enter OTP character ${index + 1}"]`,{timeout:1000}).type(digit);
+                cy.get(`[aria-label="Please enter OTP character ${index + 1}"]`,{timeout:1000}).invoke('css', 'border', '3px solid red').type(digit);
                 });
                 cy.url().should('include', 'https://raphacure.com/doctor');
               cy.wait(2000); // allow initial load
-              cy.get('.uploadBtnContainer > button').should('be.visible').click();
+              cy.get('.uploadBtnContainer > button').should('be.visible').invoke('css', 'border', '3px solid red').click();
+              cy.wait(2000); // allow time for the button to be visible
               cy.url().should('include', 'https://raphacure.com/doctor/doctorlist');
             // Type doctor's name
-            cy.get('.search-input').type('Naveen Gowda');
+            cy.get('.search-input').invoke('css', 'border', '3px solid red').type('Naveen Gowda');
             // Wait for search results to appear
             cy.wait(2000); 
-            // Wait for search popup to show up
-            // cy.get('.search-popup').should('be.visible');
+            
 
             // Ensure the popup item with correct name appears
-            cy.get('.appointment-card').first().click();
+            cy.get('.appointment-card').invoke('css', 'border', '3px solid red').first().click();
+            cy.wait(2000); // allow time for page to load
             
              cy.url().should('include', 'https://raphacure.com/doctor/doctordetails/22463');
 
             cy.wait(2000); // allow time for page to load
-
+                cy.get('.time-slot-picker').invoke('css', 'border', '3px solid red').should('be.visible');
             // Step 4: Choose Booking Options
-          cy.get('#virtual-types-list1').check().should('be.checked');
+          cy.get('#virtual-types-list1').invoke('css', 'border', '3px solid red').check().should('be.checked');
           
-          cy.get('.day-button').eq(1).click();
+          cy.get('.day-button').invoke('css', 'border', '3px solid red').eq(1).click();
 
           // Step 5: Choose Random Time Slot
-          cy.get('.time-slots-div .slot-button')
+          cy.get('.time-slots-div .slot-button').invoke('css', 'border', '3px solid red')
             .should('have.length.greaterThan', 0)
             .then($buttons => {
               const count = $buttons.length;
               const randomIndex = Math.floor(Math.random() * count);
-              cy.wrap($buttons[randomIndex]).click({force: true});
+              cy.wrap($buttons[randomIndex]).invoke('css', 'border', '3px solid red').click({force: true});
             });
             cy.wait(5000)  // optional
-            // cy.get('.pay-proceed', { timeout: 10000 }).should('be.visible').click()
+         
 
           // Step 6: Proceed to Checkout
-          cy.get('.pay-proceed',{ timeout: 10000 }).should('be.visible').click();
+          cy.get('.pay-proceed',{ timeout: 10000 }).invoke('css', 'border', '3px solid red').should('be.visible').click();
           
           cy.url().should('include', '/checkout');
           // Optional: PhonePe payment test (mock or conditionally check)
         
-
+            cy.get('.checkout-pay-buttom.checkout-btn-blue button').invoke('css', 'border', '3px solid red').should('be.visible');
           //  cy.get('.checkout-pay-buttom.phonePe button').click();
-            cy.get('.checkout-pay-buttom.checkout-btn-blue button').first().click();
+            cy.get('.checkout-pay-buttom.checkout-btn-blue button').invoke('css', 'border', '3px solid red').first().click();
             cy.wait(2000); // Wait for the payment options to load
             cy.get('iframe[class*="razorpay-checkout-frame"]', { timeout: 10000 })
               .should('be.visible')
@@ -85,22 +86,22 @@ describe('Doctor Consultation Search and Booking', () => {
             // cy.get('button[data-testid="checkout-close"]').should('be.visible').click();
           cy.get('iframe')
             .its('0.contentDocument.body').should('not.be.empty')
-            .then(cy.wrap).find('button[data-testid="checkout-close"]').should('be.visible').click();
+            .then(cy.wrap).find('button[data-testid="checkout-close"]').invoke('css', 'border', '3px solid red').should('be.visible').click();
 
           cy.get('iframe')
             .its('0.contentDocument.body').should('not.be.empty').then(cy.wrap)
-            .find('button[data-testid="confirm-positive"]').should('be.visible').click()
+            .find('button[data-testid="confirm-positive"]').invoke('css', 'border', '3px solid red').should('be.visible').click()
             .then(() => cy.log('Iframe close clicked'));
             cy.wait(1000); 
           
           // data-testid="confirm-positive"
-          cy.contains('Payment failed. Please retry from patient dashboard', { timeout: 3000 })
+          cy.contains('Payment failed. Please retry from patient dashboard', { timeout: 3000 }).invoke('css', 'border', '3px solid green')
             .should('be.visible')
             .then(() => {
               cy.log('Modal is visible');
               
-              cy.get('.modal-content').should('be.visible').within(() => {
-                cy.contains('button', 'Ok')
+              cy.get('.modal-content').invoke('css', 'border', '3px solid red').should('be.visible').within(() => {
+                cy.contains('button', 'Ok').invoke('css', 'border', '3px solid red')
                   .should('be.visible')
                   .click();
               });
