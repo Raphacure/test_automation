@@ -199,7 +199,7 @@ describe('Lab Test Heading', () => {
         .click();
     });
 
-    cy.get('.slotprice-container .slots button')
+    cy.get('.slotselection_container .slots button')
       .first()
       .should('be.visible')
       .invoke('css', 'border', '3px solid red')

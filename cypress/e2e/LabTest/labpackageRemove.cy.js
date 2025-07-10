@@ -52,5 +52,5 @@ describe('labpackageRemove', () => {
       .should('be.visible')
       .click();
   }) 
-  });
+  }); 
 })
