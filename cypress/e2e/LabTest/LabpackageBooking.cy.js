@@ -125,7 +125,7 @@
 
 
 
-describe('Lab Test Heading', () => {
+describe('Lab Package Booking', () => {
   const phoneNumber = '9505698990';
 
   function generateOTP() {
@@ -148,7 +148,7 @@ describe('Lab Test Heading', () => {
     cy.wait(2000);
   });
 
-  it('search the lab test and Book Now with next available slot', () => {
+  it('search the lab package and Book Now with next available slot', () => {
     cy.contains('Login').click();
     cy.get('.input-phone-box').type(phoneNumber);
     cy.get('#checkboxaggrews').check();
