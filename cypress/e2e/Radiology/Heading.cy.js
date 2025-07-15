@@ -54,19 +54,7 @@ describe('Radiology Heading', () => {
             .should('be.visible').click();
 
         });
-        // cy.get('.availableCentersRow div').then(($centers) => {
-        //     const count = $centers.length;
-        //     const randomIndex = Math.floor(Math.random() * count);
-        //     cy.wrap($centers[randomIndex])
-        //       .invoke('css', 'border', '3px solid blue')
-        //       .should('be.visible').find('.bottomWrapper')
-        //       .should('be.visible').find('button')
-        //       .contains(/^BooK Now$/i)
-        //       .invoke('css', 'border', '3px solid red')
-        //       .click();
-
-        //  });
-        cy.get('.availableCentersRow').then(($card) => {
+       cy.get('.availableCentersRow').then(($card) => {
       expect($card).to.have.length.greaterThan(0);
       const randomIndex = Math.floor(Math.random() * $card.length);
       const selectedCard = cy.wrap($card[randomIndex]);

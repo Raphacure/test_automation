@@ -25,4 +25,30 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 /// <reference types="Cypress"/> 
 /// <reference types="cypress-xpath" />
+Cypress.Commands.add('login', () => {
+  const phoneNumber = '9505698990';
+
+  function generateOTP() {
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `5${month}${day}3`;
+  }
+
+  const otp = generateOTP().split('');
+
+  cy.viewport(1480, 900);
+  cy.visit('https://raphacure.com/');
+  
+  cy.contains('Login').click();
+  cy.get('.input-phone-box').type(phoneNumber);
+  cy.get('#checkboxaggrews').check();
+  cy.get('.proceed-btn button').should('not.be.disabled').click();
+  cy.get('.modalBodyDefault').should('be.visible');
+
+  otp.forEach((digit, index) => {
+    cy.get(`[aria-label="Please enter OTP character ${index + 1}"]`, { timeout: 1000 }).type(digit);
+  });
+});
+
 
